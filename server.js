@@ -1,11 +1,15 @@
-// server.js
 const express = require('express');
+const { handleSuccess, handleError } = require('./utils/responseHandler');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
-    res.send('Hello, World!');
+    try {
+        handleSuccess(res, 'Hello, World!');
+    } catch (error) {
+        handleError(res, error);
+    }
 });
 
 app.listen(PORT, () => {
