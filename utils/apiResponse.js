@@ -1,3 +1,4 @@
+// Structure for a standard response object.
 class ApiResponse {
     constructor(statusCode, message, data = null, error = null) {
         this.statusCode = statusCode;
