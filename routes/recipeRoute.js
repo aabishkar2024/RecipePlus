@@ -1,5 +1,12 @@
 const express = require('express');
-const { searchRecipe, findRecipe } = require('../controllers/recipeController');
+const { 
+    searchRecipe, 
+    findRecipe, 
+    getMealCategories,
+    getMealAreas,
+    getIngredients,
+    getRandomMeals,
+} = require('../controllers/recipeController');
 
 const router = express.Router();
 
@@ -8,5 +15,17 @@ router.get('/searchRecipe', searchRecipe);
 
 // Route to find recipes by ingredient
 router.get('/findRecipe', findRecipe);
+
+// Route to list meal categories
+router.get('/categories', getMealCategories);
+
+// Route to list meal areas
+router.get('/areas', getMealAreas);
+
+// Route to list ingredients
+router.get('/ingredients', getIngredients);
+
+// Route to get a random meal
+router.get('/randomMeal', getRandomMeals);
 
 module.exports = router;
