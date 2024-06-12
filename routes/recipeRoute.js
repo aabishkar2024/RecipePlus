@@ -6,6 +6,7 @@ const {
     getMealAreas,
     getIngredients,
     getRandomMeals,
+    getDietaryRecipes
 } = require('../controllers/recipeController');
 
 const router = express.Router();
@@ -27,5 +28,8 @@ router.get('/ingredients', getIngredients);
 
 // Route to get a random meal
 router.get('/randomMeal', getRandomMeals);
+
+// Route to get recipes based on dietary restrictions
+router.get('/dietaryRecipes', getDietaryRecipes);
 
 module.exports = router;

@@ -32,6 +32,21 @@ const getRandomMeal = async () => {
     return response.data;
 };
 
+const getVeganRecipes = async () => {
+    const response = await axios.get(`${API_BASE_URL}/filter.php?c=Vegan`);
+    return response.data;
+};
+
+const getVegetarianRecipes = async () => {
+    const response = await axios.get(`${API_BASE_URL}/filter.php?c=Vegetarian`);
+    return response.data;
+};
+
+const getGlutenFreeRecipes = async () => {
+    const response = await axios.get(`${API_BASE_URL}/filter.php?c=Gluten-Free`);
+    return response.data;
+};
+
 
 module.exports = {
     searchRecipeByName,
@@ -39,5 +54,8 @@ module.exports = {
     listMealCategories,
     listMealAreas,
     listIngredients,
-    getRandomMeal
+    getRandomMeal,
+    getVeganRecipes,
+    getVegetarianRecipes,
+    getGlutenFreeRecipes
 };

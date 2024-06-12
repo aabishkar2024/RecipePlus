@@ -5,6 +5,9 @@ const {
   listMealAreas,
   listIngredients,
   getRandomMeal,
+  getVeganRecipes,
+  getVegetarianRecipes,
+  getGlutenFreeRecipes,
 } = require("../services/recipeService");
 const { handleSuccess, handleError } = require("../utils/responseHandler");
 const ApiResponse = require("../utils/apiResponse");
@@ -73,6 +76,37 @@ const getRandomMeals = async (req, res) => {
   }
 };
 
+const getDietaryRecipes = async (req, res) => {
+  const { diet } = req.query;
+  if (!diet) {
+    return res
+      .status(400)
+      .json(new ApiResponse(400, "Dietary restriction is required"));
+  }
+
+  try {
+    let data;
+    switch (diet.toLowerCase()) {
+      case "vegan":
+        data = await getVeganRecipes();
+        break;
+      case "vegetarian":
+        data = await getVegetarianRecipes();
+        break;
+      case "gluten-free":
+        data = await getGlutenFreeRecipes();
+        break;
+      default:
+        return res
+          .status(400)
+          .json(new ApiResponse(400, "Invalid dietary restriction"));
+    }
+    handleSuccess(res, data);
+  } catch (error) {
+    handleError(res, error);
+  }
+};
+
 module.exports = {
   searchRecipe,
   findRecipe,
@@ -80,4 +114,5 @@ module.exports = {
   getMealAreas,
   getIngredients,
   getRandomMeals,
+  getDietaryRecipes,
 };
